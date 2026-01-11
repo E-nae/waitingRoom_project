@@ -16,14 +16,14 @@
 
 🛠 기술 스택 (Tech Stack)
 [Frontend]
-React / Next.js: 클라이언트 상태 관리 및 UI 렌더링.
-Framer Motion: 대기열 진입, 로딩, 입장 성공 등 상태 변화 애니메이션 구현.
-Tailwind CSS: 직관적이고 모던한 스타일링.
+- React / Next.js: 클라이언트 상태 관리 및 UI 렌더링.
+- Framer Motion: 대기열 진입, 로딩, 입장 성공 등 상태 변화 애니메이션 구현.
+- Tailwind CSS: 직관적이고 모던한 스타일링.
 
 [Backend]
-Node.js / Express: REST API 서버 구축.
-TypeScript: 타입 안정성 확보.
-Redis (ioredis): 대기열 관리(Sorted Set), 활성 유저 관리(Set), 재고 관리(String), 원자적 연산 수행.
+- Node.js / Express: REST API 서버 구축.
+- TypeScript: 타입 안정성 확보.
+- Redis (ioredis): 대기열 관리(Sorted Set), 활성 유저 관리(Set), 재고 관리(String), 원자적 연산 수행.
 
 📂 프로젝트 구조
 Bash
@@ -47,8 +47,8 @@ Bash
 
 ⚙️ 실행 방법 (Getting Started)
 1. 사전 요구사항 (Prerequisites)
-Node.js (v18 이상 권장)
-Redis Server (로컬 혹은 원격 실행 필요)
+- Node.js (v18 이상 권장)
+- Redis Server (로컬 혹은 원격 실행 필요)
 
 2. Redis 설정
 - Redis 서버가 실행 중이어야 합니다. .env 설정이 없다면 기본적으로 localhost:6379에 접속을 시도합니다. 
@@ -62,7 +62,6 @@ npm run dev # 또는 npx ts-node index.ts
 
 4. 프론트엔드 실행
 [Bash]
-
 cd frontend
 npm install
 npm run dev
