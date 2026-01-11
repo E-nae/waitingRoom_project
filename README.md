@@ -1,5 +1,6 @@
 ## 대기열 예매 시스템
-    - 대규모 트래픽이 몰리는 티켓 예매 상황을 가정하여 구축한 가상 대기열(Virtual Waiting Room) 시스템입니다. Redis의 자료구조를 활용하여 선착순 대기열을 구현하고, Lua Script를 통해 결제 시점의 동시성 문제(Race Condition)를 해결했습니다.
+    - 대규모 트래픽이 몰리는 티켓 예매 상황을 가정하여 구축한 가상 대기열(Virtual Waiting Room) 시스템입니다. 
+    - Redis의 자료구조를 활용하여 선착순 대기열을 구현하고, Lua Script를 통해 결제 시점의 동시성 문제(Race Condition)를 해결했습니다.
 
 🚀 주요 기능 및 기술적 특징
 1. 가상 대기열 (Virtual Queue) 구현
