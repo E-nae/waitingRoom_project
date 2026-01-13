@@ -6,10 +6,10 @@
     "lint": "eslint",
     "dev": "cross-env NODE_ENV=development nodemon ts-node index.ts",
     "start": "cross-env NODE_ENV=production ts-node index.ts"
-
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^10.1.0",
     "express": "^5.2.1",
     "framer-motion": "^12.24.11",
     "next": "16.1.1",
