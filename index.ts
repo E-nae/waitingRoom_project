@@ -6,11 +6,26 @@ import { QueueService } from './services/queue.service';
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://queue-reservation.pages.dev',
+    'https://project2.enaeble.co.kr',
+];
+  
 app.use(cors({
-    origin: 'http://localhost:3000', 
-    credentials: true, 
+    origin(origin, callback) {
+        // 서버 → 서버 요청 (origin 없음)
+        if (!origin) return callback(null, true);
+    
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+    
+        callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
 }));
-
+  
 // 미들웨어
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
