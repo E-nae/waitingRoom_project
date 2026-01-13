@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import { TicketController } from './src/services/controller';
-import { QueueService } from './src/services/queue.service';
+import { TicketController } from './services/controller';
+import { QueueService } from './services/queue.service';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
