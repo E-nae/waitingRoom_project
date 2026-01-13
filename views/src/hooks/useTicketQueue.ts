@@ -11,7 +11,7 @@ export function useTicketQueue(userId: string) {
   const joinQueue = async () => {
     try {
       setStatus('waiting');
-      await fetch('http://localhost:4000/queue/join', {
+      await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/queue/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId }),
@@ -29,7 +29,7 @@ export function useTicketQueue(userId: string) {
 
     const intervalId = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:4000/queue/status?userId=${userId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/queue/status?userId=${userId}`);
         const data = await res.json();
 
         if (data.status === 'entered') {
@@ -53,7 +53,7 @@ export function useTicketQueue(userId: string) {
   // 3. 예매 요청 (POST /purchase) - Lua Script 실행 트리거
   const buyTicket = async () => {
     try {
-      const res = await fetch('http://localhost:4000/purchase', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/purchase`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, quantity: 1 }),
