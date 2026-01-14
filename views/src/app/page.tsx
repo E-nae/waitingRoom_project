@@ -1,7 +1,7 @@
 'use client';
 
-import { useTicketQueue } from '@/hooks/useTicketQueue';
-import { NumberTicker } from '@/components/NumberTicker';
+import { useTicketQueue } from '../hooks/useTicketQueue';
+import { NumberTicker } from '../components/NumberTicker';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // 가상의 사용자 ID (실제로는 로그인 세션에서 가져오기)
