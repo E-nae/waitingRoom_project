@@ -1,10 +1,13 @@
 import Redis from 'ioredis';
 
+const redisUrl = process.env.REDIS_URL;
 // Redis 클라이언트 생성 (환경변수 사용 권장)
-const redis = new Redis({
-  host: process.env.redis_host, 
-  port: process.env.redis_port ? Number(process.env.redis_port) : undefined,
-});
+const redis = redisUrl 
+  ? new Redis(redisUrl) // Upstash (Production)
+  : new Redis({         // Local (Development)
+      host: 'localhost',
+      port: 6379,
+    });
 
 /**
  * Lua Script: 결제 승인 (Atomic)
