@@ -61,9 +61,22 @@ export const QueueService = {
    * Lua Script 실행
    */
   async purchase(userId: string, quantity: number) {
-    // @ts-ignore (defineCommand로 추가된 메서드라 TS가 모를 수 있음)
-    const result = await redis.atomicPurchase(STOCK_KEY, ACTIVE_KEY, userId, quantity);
-
+    const safeUserId = String(userId);
+    const safeQuantity = Number(quantity);
+  
+    if (!safeUserId || Number.isNaN(safeQuantity)) {
+      return { success: false, message: '잘못된 요청입니다.' };
+    }
+  
+    const result = await redis.atomicPurchase(
+      STOCK_KEY,
+      ACTIVE_KEY,
+      safeUserId,
+      safeQuantity
+    );
+    
+    const isActive = await redis.sismember(ACTIVE_KEY, userId);
+    console.log('[DEBUG] isActive:', isActive);
     if (result === 1) {
       // 성공: DB에 주문 데이터 Insert
       // await db.orders.create(...) 
@@ -72,6 +85,8 @@ export const QueueService = {
       return { success: true, message: '예매 성공!' };
     } else if (result === -1) {
       return { success: false, message: '접근 권한이 없습니다. 대기열을 통해 입장해주세요.' };
+    } else if (result === -2) {
+      return { success: false, message: '수량 오류' };
     } else {
       return { success: false, message: '매진되었습니다.' };
     }

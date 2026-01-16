@@ -5,6 +5,8 @@ export const TicketController = {
   // POST /queue/join
   async join(req: Request, res: Response) {
     const { userId } = req.body;
+    console.log('userId: ');
+    console.log(userId);
     await QueueService.enterQueue(userId);
     res.json({ message: '대기열에 등록되었습니다.' });
   },
@@ -25,9 +27,26 @@ export const TicketController = {
 
   // POST /purchase
   async buy(req: Request, res: Response) {
-    const { userId, quantity } = req.body;
+
+    console.log('purchase body:', req.body);
+    console.log('types:', {
+      userId: typeof req.body.userId,
+      quantity: typeof req.body.quantity,
+    });
+
+    const userId = String(req.body.userId);
+    const quantity = Number(req.body.quantity);
+    
+    if (!userId || Number.isNaN(quantity)) {
+      return res.status(400).json({
+        success: false,
+        message: 'invalid payload',
+      });
+    }    
     const result = await QueueService.purchase(userId, quantity);
     
+    console.log('🔥 purchase result:', result);
+
     if (result.success) {
       res.status(200).json(result);
     } else {

@@ -4,6 +4,10 @@ import { TicketController } from './services/controller';
 import { QueueService } from './services/queue.service';
 
 const app = express();
+// 미들웨어
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = [
@@ -26,9 +30,6 @@ app.use(cors({
     credentials: true,
 }));
   
-// 미들웨어
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // 라우트
 app.post('/queue/join', TicketController.join);

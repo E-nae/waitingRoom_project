@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx index.ts",
-    "build": "tsc -p tsconfig.server.json",
+    "build": "tsc",
     "start": "node dist/index.js"
   },
   "dependencies": {

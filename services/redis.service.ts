@@ -22,6 +22,10 @@ const PURCHASE_SCRIPT = `
   local activeUsersKey = KEYS[2] -- 활성 유저 목록 키
   local userId = ARGV[1]        -- 유저 ID
   local quantity = tonumber(ARGV[2]) -- 구매 수량
+  
+  if not quantity or quantity <= 0 then
+    return -2 -- invalid quantity
+  end
 
   -- 1. 입장 권한(Active) 체크
   -- sismember: Set에 값이 있으면 1, 없으면 0 리턴
