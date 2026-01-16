@@ -52,6 +52,7 @@ export function useTicketQueue(userId: string) {
 
   // 3. 예매 요청 (POST /purchase) - Lua Script 실행 트리거
   const buyTicket = async () => {
+    console.log('REAL URL:', `${process.env.NEXT_PUBLIC_API_PATH}/purchase`);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_PATH}/purchase`, {
         method: 'POST',

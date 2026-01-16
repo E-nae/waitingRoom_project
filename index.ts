@@ -30,16 +30,16 @@ app.use(cors({
     credentials: true,
 }));
   
+/** 서버 깨우기 */
+app.get('/health', (req, res) => {
+    res.status(200).send({ok: true});
+});
 
 // 라우트
 app.post('/queue/join', TicketController.join);
 app.get('/queue/status', TicketController.status);
 app.post('/purchase', TicketController.buy);
 
-/** 서버 깨우기 */
-app.get('/health', (req, res) => {
-    res.status(200).send({ok: true});
-});
 
 /*** 스케쥴러 */
 setInterval(async () => {

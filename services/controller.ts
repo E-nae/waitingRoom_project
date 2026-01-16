@@ -28,12 +28,6 @@ export const TicketController = {
   // POST /purchase
   async buy(req: Request, res: Response) {
 
-    console.log('purchase body:', req.body);
-    console.log('types:', {
-      userId: typeof req.body.userId,
-      quantity: typeof req.body.quantity,
-    });
-
     const userId = String(req.body.userId);
     const quantity = Number(req.body.quantity);
     
@@ -45,12 +39,22 @@ export const TicketController = {
     }    
     const result = await QueueService.purchase(userId, quantity);
     
-    console.log('🔥 purchase result:', result);
+    console.log('purchase result:', result);
 
     if (result.success) {
-      res.status(200).json(result);
-    } else {
-      res.status(400).json(result);
+      return res.status(200).json(result);
+    }
+    
+    switch (result.message) {
+      case '접근 권한이 없습니다. 대기열을 통해 입장해주세요.':
+        return res.status(403).json(result);
+    
+      case '매진되었습니다.':
+      case '수량 오류':
+        return res.status(409).json(result);
+    
+      default:
+        return res.status(400).json(result);
     }
   }
 };
